@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="dynamic-forms-styles.css">
+</head>
+<body>
+    <div class="questions-manager-container">
+        <div class="heading">Add Questions</div>
+        <template id="question-template">
+            <div class="question-container">
+                <div class="question-type-dropdown">
+                    <select>
+                        <option>Text</option>
+                        <option>Number</option>
+                        <option>Date</option>
+                        <option>Document</option>
+                        <option value="dropdown-single">Dropdown - Single select</option>
+                        <option value="dropdown-multiple">Dropdown - Multi select</option>                        
+                    </select>
+                </div>
+                <div>
+                    <div type="text" placeholder="Type your question here" class="question-text" contenteditable="true"></div>
+                    <div class="question-content">
+                        
+                    </div>
+                </div>
+                <div class="question-validation-div">
+                    <div><input type="checkbox" class="is-required"> Required</div>
+                    <div class="range-question">
+
+                    </div>
+                    <div class="max-length-question">
+                        <!-- Max length:<input type="number"> -->
+                    </div>
+                    <button class="delete-question-button">Delete</button>
+                </div>
+            </div>
+
+        </template>
+
+        <div class="questions-list">
+
+        </div>
+
+        <div class="footer">
+            <button class="add-new-question">Add a Question</button>
+            <button class="preview-form">Preview</button>
+        </div>
+    </div>
+
+    <div class="questions-answers-container">
+        <div class="heading">Answer Questions</div>
+        <div class="questions-preview-list">
+
+        </div>
+        <div class="footer">
+            <button class="validate-submit-questions">Validate & Submit</button>
+        </div>
+
+    </div>
+    
+
+    <script  src="final-draft.js"></script>
+</body>
+</html>
