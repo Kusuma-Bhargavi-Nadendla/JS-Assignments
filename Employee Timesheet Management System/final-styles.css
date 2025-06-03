@@ -1,0 +1,392 @@
+:root {
+    --webpage-blue: rgb(156, 184, 208);
+}
+
+body {
+    height: 100vh;
+    margin: 0;
+    background-color: gray;
+    
+}
+#time-sheet-entries{
+    text-align: center;
+}
+
+#timesheet-container {
+    background-color: white;
+    width: 98%;
+    min-height: 98%;
+    margin: 1rem;
+    box-sizing: border-box;
+    border-radius: 25px;
+    padding: 1rem 0;
+}
+
+#in-out-menu-div {
+    padding: 0.5rem;
+    display: flex;
+    justify-content: flex-end;
+
+    & div {
+        margin: 0.5rem;
+        padding: 0.5rem;
+        display: flex;
+        align-items: center;
+        background-color: aliceblue;
+        border: 1px solid var(--webpage-blue);
+        border-radius: 5px;
+
+    }
+}
+img {
+    width: 20px;
+    height: 20px;
+}
+
+#time-sheet,h3 {
+    margin: 1rem
+}
+
+#time-sheet-header {
+    background-color: aliceblue;
+    display: flex;
+    justify-content: space-around;
+    padding: 1rem;
+    font-weight: bolder;
+}
+
+.time-sheet-header-column.required::after {
+    content: '*';
+    color: red;
+    font-size: 12px;
+    margin-left: 5px;
+}
+
+#time-sheet-entries {
+    padding: 1rem 0;
+}
+
+.time-sheet-entry {
+    display: flex;
+    justify-content: space-around;
+    /* flex-direction: row; */
+    padding: 1rem;
+    border: 1px solid var(--webpage-blue);
+}
+
+
+.activity, .task {
+    width: 15%;
+}
+
+.task-details {
+    width: 25%;
+}
+
+.start-time, .end-time, .duration {
+    width: 10%;
+}
+.type, .actions {
+    width: 5%;
+}
+
+.activity select, .task select {
+    width: 90%;
+    height: 2.5rem;
+    border: 1px solid var(--webpage-blue);
+    border-radius: 5px;
+    outline: none;
+    padding: 2px;
+    cursor: pointer;
+
+}
+/* 
+.activity select option:hover {
+    color: aliceblue;
+} */
+
+.task-details textarea, .write-comment textarea {
+    width: 90%;
+    padding: 0.5rem;
+    border: 1px solid var(--webpage-blue);
+    appearance: none;
+    border-radius: 5px;
+    resize: none;
+}
+
+.task-details textarea:focus, .write-comment textarea:focus {
+    outline: none;
+    box-shadow: 5px 5px 10px aliceblue;
+}
+
+.time-sheet-task-details-error-limit, .write-comment-limit-div{
+    display: flex;
+    justify-content: space-between;
+    font-weight: 300;
+    font-size: 0.75rem;
+    padding: 0 10px;
+    
+}
+.task-details-error-message{
+    color:Red;
+    visibility:hidden;
+}
+.actions {
+    display: flex;
+    justify-content: space-around;
+    & img{
+        cursor: pointer;
+    }
+}
+
+.start-end-duration {
+    display: flex;
+    width: 90%;
+    /* flex-direction: row; */
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--webpage-blue);
+    border-radius: 5px;
+    padding: 5px;
+    height: 2rem;
+}
+
+.start-end-duration.duration {
+    justify-content: center;
+}
+
+.start-time, .end-time {
+    position: relative;
+    cursor: pointer;
+}
+
+.time-sheet-entry-timer {
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    background-color: white;
+    border: 1px solid var(--webpage-blue);
+    border-radius: 5px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translateY(50%);
+    z-index: 100;
+
+}
+.time-sheet-entry-timer.hidden{
+    display: none;
+}
+
+.time-sheet-entry-timer div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+}
+
+.time-sheet-entry-timer div input {
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    border: none;
+
+    &:focus {
+        border: none;
+    }
+}
+
+.time-sheet-entry-timer .hours input, .time-sheet-entry-timer .minutes input {
+    background-color: aliceblue;
+}
+.timer-error-message{
+    color: red;
+    font-size: 0.75rem;
+    padding: 0 10px;
+    font-weight: 300;
+}
+.timer-error-message.hidden{
+    display: none;
+}
+
+#add-new-entry {
+    border: 1px solid var(--webpage-blue);
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.Warning {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border: 2px solid var(--webpage-blue);
+        font-weight: bold;
+        font-size: 1rem;
+        border-radius: 10px;
+        box-sizing: border-box; 
+        z-index: 150;
+        background-color: aliceblue;
+}
+.Warning.hidden{
+    display: none;
+}
+
+.Warning .warning {
+    background-color: rgb(132, 176, 215);
+    padding: 0.5rem 1rem;
+    position: relative; 
+}
+.Warning .close-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+.Warning .areYouSure {
+    padding: 0.5rem 1rem;
+}
+
+.Warning div {
+    padding: 1rem;
+}
+.warningButtons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.warningButtons button {
+    margin: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid var(--webpage-blue);
+    font-weight: bold;
+    width: 5rem;
+    cursor: pointer;
+}
+#confirmDeleteEntry{
+    background-color:rgb(132, 176, 215) ;
+}
+
+.timesheet-overview{
+    display: flex;
+    flex-direction: row;
+    /* position: sticky;
+    bottom:2%; */
+    background-color: white;
+    margin: 1rem;
+    font-weight: bold;
+}
+    
+.time-sheet-hours-overview{
+    width: 16%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--webpage-blue);
+    background-color: aliceblue;
+    border-radius: 5px;
+}
+
+.comment-extra-effective{
+    width: 60%;
+}
+.write-comment textarea{
+    width: 95%;
+}
+.write-comment{
+    position: relative;
+}
+.write-comment-limit-div{
+    position: absolute;
+    right:2rem;
+}
+.write-comment-error-message{
+    color:Red;
+    visibility:hidden;
+}
+.effective-break-hours-summary{
+    display: flex;
+    flex-direction: row;
+    font-weight: 300;
+}
+.effective-hours-summary, .break-hours-summary{
+    margin: 0.5rem;
+}
+.hours-display-div{
+    display: flex;
+    justify-content: space-between;
+}
+
+.summary-buttons-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.summary-buttons-div button{
+    margin:1rem;
+    background-color:aliceblue;
+    border: 1px solid var(--webpage-blue);
+    font-weight: bold;
+    width:5rem;
+    height: 2rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#saveChanges,#submitTimesheet{
+    background-color: rgba(26, 26, 90, 0.747);
+    color:white;
+}
+#saveChanges:disabled, #submitTimesheet:disabled{
+    background-color: aliceblue;
+    
+}
+.summary-buttons-div button:disabled{
+    color: white;
+}
+#clock-in,#clock-out{
+    color: white;
+    font-weight: bold;
+    
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    height: 3rem;
+
+}
+.clock-in-out{
+    padding: 0 !important;
+    background-color:  rgba(26, 26, 90, 0.747) !important;;
+}
+.menu-button button{
+    background-color:  rgba(26, 26, 90, 0.747) !important;;
+}
+#clock-in:disabled, #clock-out:disabled{
+    background-color: gray !important;
+}
+/* .cover-up{
+    position: fixed;
+      inset:0;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 10;
+      display: none;
+} */
+ h3 span{
+    color:orange;
+ }
+ h3 span.submit{
+    color:green;
+ }
+ .coverScreen{
+    width: 100%;
+    height: 100%;
+    display: block;
+    background-color: white;
+    z-index: 200;
+ }

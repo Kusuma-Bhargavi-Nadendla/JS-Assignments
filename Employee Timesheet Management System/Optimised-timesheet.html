@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="final-styles.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- <div class="cover-up"></div> -->
+    <div id="timesheet-container">
+
+
+        <div id="in-out-menu-div">
+            <!-- <button id="clearLog">Clear</button> -->
+            <div class="menu-button clock-in-out"><button id="clock-in">Clock-In</button></div>
+            <div class="menu-button clock-in-out"><button id="clock-out">Clock-Out</button></div>
+            <div class="menu-button" ><img src="https://apps.pal.tech/hrms/assets/icons/punch-in.svg" > <span id="biometric-in">Missing</span></div>
+            <div class="menu-button"  ><img src=" https://apps.pal.tech/hrms/assets/icons/punch-out.svg"><span id="biometric-out">Missing</span></div>
+            <div class="menu-button"><img src="https://apps.pal.tech/hrms/assets/images/biometrics.png">Effective Hours:<span class="biometric effective-hours">0h : 0m</span> </div>
+            <div class="menu-button"><img src="https://apps.pal.tech/hrms/assets/images/coffee-cup.png">Break Hours :<span class="biometric break-hours">0h : 0m</span> </div>
+            <div class="menu-button">05/03/2025 </div>
+        </div>
+
+        <div class="coverScreen"></div>
+        <div class="Warning hidden" id="deleteEntryWarning">
+            <div class="warning">Alert <span class="close-btn" id="close-btn">&times;</span></div>
+            <div class="areYouSure">Are you sure you want to delete this Entry???</div>
+            <div class="warningButtons">
+                <button id="cancelDeletingEntry">Cancel</button>
+                <button id="confirmDeleteEntry">Delete</button>
+            </div>
+        </div>
+    
+
+        <div class="Warning hidden" id="cancelChangesWarning">
+            <div class="warning">Alert <span class="close-btn cancel">&times;</span></div>
+            <div class="areYouSure">Are you sure you want to leave the changes unsaved? If you do, all of your progress will be lost.</div>
+            <div class="warningButtons">
+                <button id="undoCancelChanges">No</button>
+                <button id="confirmCancelChanges">Yes</button>
+            </div>
+        </div>
+
+        <div class="Warning hidden" id="submitChangesWarning">
+            <div class="warning">Alert <span class="close-btn submit">&times;</span></div>
+            <div class="areYouSure">Are you sure you want to submit timesheet</div>
+            <div class="warningButtons">
+                <button id="undoSubmitChanges">No</button>
+                <button id="confirmSubmitChanges">Yes</button>
+            </div>
+        </div>
+
+        
+
+
+        <h3>Timesheet entries     <span>Not Submitted</span></h3>
+
+
+        <div id="time-sheet">
+            <div id="time-sheet-header">
+                <div class="time-sheet-header-column type">Type</div>
+                <div class="time-sheet-header-column required activity">Activity</div>
+                <div class="time-sheet-header-column required task">Task</div>
+                <div class="time-sheet-header-column task-details">Task Details</div>
+                <div class="time-sheet-header-column required start-time">Start Time</div>
+                <div class="time-sheet-header-column required end-time">End Time</div>
+                <div class="time-sheet-header-column duration">Duration</div>
+                <div class="time-sheet-header-column actions">Actions</div>
+
+            </div>
+
+
+
+            <template id="row-div-template">
+                <div class="time-sheet-entry">
+                    <div class="time-sheet-entry-element type">
+                        <img src="https://apps.pal.tech/hrms/assets/images/activity-type.png">
+                    </div>
+                    <div class="time-sheet-entry-element activity">
+                        <select>
+                            <option>Training</option>
+                            <option>Break</option>
+                            <option>HR Activities</option>
+                            <option>COE</option>
+                            <option>Miscellaneous</option>
+                        </select>
+                    </div>
+                    <div class="time-sheet-entry-element task">
+                        <select>
+                            <option>Doubt clarification</option>
+                            <option>Self Learning</option>
+                            <option>Assignment</option>
+                            <option>Session</option>
+                            <option>Training preparation</option>
+                            <option>1:1 Discussion</option>
+                        </select>
+                    </div>
+                    <div class="time-sheet-entry-element task-details">
+                        <textarea rows="2" placeholder="Enter Task details" maxlength="255"></textarea>
+                        <div class="time-sheet-task-details-error-limit">
+                            <span class="task-details-error-message"> This field cannot be empty</span>
+                            <span class="task-details-limit">0/255</span>
+                        </div>
+                    </div>
+
+
+                    <div class="time-sheet-entry-element start-time">
+
+                        <div class="start-end-duration start-time">
+                            <div id="start-time-data" class="recorded-time-data"> Start time</div>
+                            <img src="clock-svg.svg" class="timer-clock-logo">
+                        </div>
+
+                        <div class="time-sheet-entry-timer hidden">
+                            <div class="hours">
+                                <img src="arrow-up-svg.svg" class="up">
+                                <input type="text" value="12">
+                                <img src="arrow-down-svg.svg" class="down">
+                            </div>
+                            :
+                            <div class="minutes">
+                                <img src="arrow-up-svg.svg" class="up">
+                                <input type="text" value="43">
+                                <img src="arrow-down-svg.svg" class="down">
+                            </div>
+                            <div class="am-pm">
+                                <img src="arrow-up-svg.svg" class="up">
+                                <input type="text" value="PM">
+                                <img src="arrow-down-svg.svg" class="down">
+                            </div>
+                        </div>
+
+                        <div class="timer-error-message hidden">End time should be more than Start time.</div>
+
+                    </div>
+
+
+                    <div class="time-sheet-entry-element end-time">
+                        <div class="start-end-duration end-time">
+                            <div id="end-time-data" class="recorded-time-data"> End time</div><img src="clock-svg.svg" class="timer-clock-logo">
+                        </div>
+                        <div class="time-sheet-entry-timer hidden">
+                            <div class="hours">
+                                <img src="arrow-up-svg.svg" class="up">
+                                <input type="text" value="12">
+                                <img src="arrow-down-svg.svg" class="down">
+                            </div>
+                            :
+                            <div class="minutes">
+                                <img src="arrow-up-svg.svg" class="up">
+                                <input type="text" value="43">
+                                <img src="arrow-down-svg.svg" class="down">
+                            </div>
+                            <div class="am-pm">
+                                <img src="arrow-up-svg.svg" class="up">
+                                <input type="text" value="PM">
+                                <img src="arrow-down-svg.svg" class="down">
+                            </div>
+                        </div>
+                        <div class="timer-error-message hidden">Start time must be less than end time.</div>
+
+                    </div>
+
+
+
+                    <div class="time-sheet-entry-element duration">
+                        <div class="start-end-duration duration">
+                            <div id="duration-data" class="duration-data"> 00h 00m</div>
+                        </div>
+                    </div>
+
+                    <div class="time-sheet-entry-element actions">
+                        <img src="https://apps.pal.tech/hrms/assets/icons/delete.svg" class="deleteEntry">
+                        <img src="https://apps.pal.tech/hrms/assets/images/split.png" class="splitEntry">
+                    </div>
+                </div>
+            </template>
+
+
+
+            <div id="time-sheet-entries">
+
+            </div>
+
+            <div id="add-new-entry">
+                <div id="click-to-add-entry-button">
+                    <img src="https://apps.pal.tech/hrms/assets/icons/checked-circle-plus.svg">
+                    Add a new entry
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="timesheet-overview">
+            <div class="comment-extra-effective">
+                Comment:
+                <div class="write-comment">
+                    <textarea rows="4" maxlength="255"></textarea>
+                    <div class="write-comment-limit-div">
+                        <span class="write-comment-error-message timer-error-message"> The timesheet effective hours submitted differs by more than 30 minutes from biometric effective hours, please add a comment.</span>
+                        <span class="write-comment-limit">0/255</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="time-sheet-hours-overview">
+                Timesheet
+                <div class="effective-break-hours-summary">
+                    <div class="effective-hours-summary">
+                        Effective Hours
+                        <div class="hours-display-div">
+                            <span class="total-recorded-effective-hours"> 0h 0m</span>
+                            <img src="https://apps.pal.tech/hrms/assets/images/information.png">
+                        </div>
+                    </div>
+
+                    <div class="break-hours-summary">
+                        Break Hours
+                        <div class="hours-display-div">
+                            <span class="total-recorded-break-hours">0h 0m</span>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="summary-buttons-div">
+                <button id="cancelChanges">Cancel</button>
+                <button id="saveChanges" >Save</button>
+                <button id="submitTimesheet">Submit</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="Final-Script.js"></script>
+
+</body>
+
+</html>
